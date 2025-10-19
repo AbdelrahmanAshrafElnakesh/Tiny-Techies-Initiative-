@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Tiny Techies Initiative - Empowering kindergarten kids with technology skills through programming and IoT projects.">
+  <meta name="keywords" content="coding for kids, kindergarten technology, STEM education, IoT for children">
+  <title>Tiny Techies Initiative - Technology Education for Kindergarten Kids</title>
+  <link rel="icon" href="https://placehold.co/32x32/0072ff/ffd166?text=T" type="image/x-icon" />
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* --- Keyframe Animation for Background --- */
+    @keyframes tech-float {
+      0% { background-position: 0% 0%, 0 0; }
+      100% { background-position: 100px 100px, 0 0; }
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* --- Technical Overlay (Animated Glowing Pixels/Circuits) --- */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; 
+      pointer-events: none;
+      opacity: 0.25;
+      
+      background: 
+          repeating-linear-gradient(
+              -45deg,
+              rgba(255, 255, 255, 0.05) 0,
+              rgba(255, 255, 255, 0.05) 5px,
+              rgba(0, 200, 255, 0.15) 5px,
+              rgba(0, 200, 255, 0.15) 10px
+          ),
+          radial-gradient(circle at 80% 90%, rgba(255, 209, 102, 0.15) 10%, transparent 50%);
+      
+      background-size: 50px 50px, 100% 100%;
+      animation: tech-float 100s linear infinite alternate; 
+    }
+
+    /* Sticky Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 114, 255, 0.95); 
+      backdrop-filter: saturate(180%) blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #ffd166;
+      letter-spacing: 2px;
+      cursor: default;
+      user-select: none;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: #f0f0f0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background-color: #ffd166;
+      color: #0072ff;
+      outline: none;
+    }
+    
+    /* Mobile Menu Icon */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: #ffd166;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+    }
+
+
+    /* Hero Section */
+    header.hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      text-align: center;
+      padding: 0 2rem;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent 70%);
+      position: relative;
+      z-index: 1;
+    }
+
+    header.hero h1 {
+      font-size: 4rem;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #ffd166;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    header.hero p {
+      font-size: 1.5rem;
+      max-width: 700px;
+      color: #e0e0e0;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    }
+
+    header.hero button {
+      background: #ffd166;
+      color: #0072ff;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(255, 209, 102, 0.6);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition-delay: 0.4s;
+    }
+
+    header.hero button:hover,
+    header.hero button:focus {
+      background-color: #ffca3a;
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    header.hero.visible h1,
+    header.hero.visible p,
+    header.hero.visible button {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Section backgrounds */
+    section:nth-of-type(odd) {
+      background: rgba(255, 255, 255, 0.1);
+      clip-path: polygon(0 0, 100% 5%, 100% 100%, 0% 95%);
+    }
+
+    section:nth-of-type(even) {
+      background: rgba(0, 114, 255, 0.15);
+      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+    }
+
+    section h2 {
+      font-size: 2.8rem;
+      color: #ffd166;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    section p {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #f0f0f0;
+      max-width: 900px;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 3px rgba(0,0,0,0.3);
+    }
+    
+    /* Specific centering for the contact section paragraph */
+    #contact p {
+        max-width: 100%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Impact Section */
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(255, 209, 102, 0.3);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(255, 209, 102, 0.4);
+    }
+
+    .stat-number {
+      font-size: 4rem;
+      font-weight: 800;
+      color: #ffd166;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1.3rem;
+      color: #f0f0f0;
+      font-weight: 600;
+    }
+
+    /* Gallery (Keeping class definition, though content is removed) */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      /* Enforce consistent height for better grid layout */
+      height: 250px; 
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      filter: drop-shadow(0 0 5px #ffd166);
+    }
+
+    .gallery img:hover,
+    .gallery img:focus {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(255, 209, 102, 0.8);
+      outline: none;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial .author {
+      font-weight: bold;
+      color: #ffd166;
+    }
+
+    /* Contact Button */
+    .btn-contact {
+      background: #ffd166;
+      color: #0072ff;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(255, 209, 102, 0.6);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      user-select: none;
+      text-decoration: none; /* Ensure links styled as buttons don't have underlines */
+    }
+
+    .btn-contact:hover,
+    .btn-contact:focus {
+      background-color: #ffca3a;
+      transform: scale(1.1);
+      outline: none;
+    }
+
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #ffd166;
+      color: #0072ff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 1rem;
+      color: #ffd166;
+      background: rgba(0, 114, 255, 0.95);
+      box-shadow: inset 0 1px 5px rgba(255, 255, 255, 0.2);
+      user-select: none;
+    }
+    
+    /* Newsletter Form Specific Styles */
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+      align-items: center; 
+    }
+
+    .newsletter-form input {
+      height: 3.5rem; 
+      padding: 0 1.5rem;
+      border: 2px solid rgba(0, 114, 255, 0.8); 
+      background-color: #f0f0f0; 
+      border-radius: 50px;
+      min-width: 250px;
+      font-size: 1rem;
+      color: #333; 
+      box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
+      transition: border-color 0.3s ease;
+    }
+    
+    .newsletter-form input:focus {
+        border-color: #ffd166;
+        outline: none;
+    }
+
+
+    /* Responsive Improvements (Targeting smaller screens first) */
+    @media (max-width: 1024px) {
+        /* General padding adjustments for smaller screens */
+        nav {
+            padding: 1rem 2rem;
+        }
+        section {
+            padding: 4rem 2rem;
+        }
+
+        /* Adjust Hero Font Sizes */
+        header.hero h1 {
+            font-size: 3.5rem;
+        }
+        header.hero p {
+            font-size: 1.3rem;
+        }
+
+        /* Adjust Section Font Sizes */
+        section h2 {
+            font-size: 2.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+        }
+        
+        /* Stats grid adjustments */
+        .impact-stats {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+
+
+    @media (max-width: 768px) {
+      /* Mobile Navigation Implementation */
+      nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      nav ul {
+        /* Hide the navigation menu by default on mobile */
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Position right below the nav bar */
+        left: 0;
+        width: 100%;
+        background: rgba(0, 114, 255, 0.95);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 1rem 0;
+        gap: 0;
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      
+      nav ul.open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      nav ul li {
+        width: 100%;
+        text-align: center;
+      }
+      
+      nav ul li a {
+        display: block;
+        padding: 0.75rem 0;
+        width: 100%;
+        border-radius: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      /* Hero adjustments */
+      header.hero {
+        height: 75vh;
+      }
+      header.hero h1 {
+        font-size: 2.8rem;
+      }
+      header.hero p {
+        font-size: 1.1rem;
+      }
+      
+      /* Section adjustments */
+      section {
+        padding: 3rem 1.5rem;
+      }
+      section h2 {
+        font-size: 2rem;
+      }
+      section p {
+        font-size: 1rem;
+      }
+
+      .stat-number {
+        font-size: 3rem;
+      }
+      
+      /* Gallery adjustments */
+      .gallery img {
+        height: 200px; /* Make images slightly smaller for mobile */
+      }
+
+      /* Newsletter form stacking */
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-form input {
+        min-width: 80%;
+        max-width: 100%;
+      }
+      
+      .newsletter-form button {
+        width: 80%;
+        max-width: 100%;
+        padding: 0.8rem 3rem;
+      }
+
+      /* Testimonials stacking better */
+      .testimonials {
+          grid-template-columns: 1fr;
+      }
+      
+      .impact-stats {
+        grid-template-columns: 1fr 1fr; /* Two columns on tablets/larger phones */
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Smallest mobile view */
+      nav {
+        padding: 1rem 1rem;
+      }
+      
+      header.hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      header.hero button {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+      }
+
+      .impact-stats {
+        grid-template-columns: 1fr; /* Stack on small phones */
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav role="navigation" aria-label="Primary Navigation">
+    <div class="logo" aria-label="Tiny Techies Initiative Logo">Tiny Techies</div>
+    
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" id="menuToggle">☰</button>
+    
+    <ul id="main-menu">
+      <li><a href="#hero" tabindex="0">Home</a></li>
+      <li><a href="#about" tabindex="0">About</a></li>
+      <li><a href="#vision" tabindex="0">Vision</a></li>
+      <li><a href="#impact" tabindex="0">Our Impact</a></li>
+      <li><a href="#activities" tabindex="0">Activities</a></li>
+      <li><a href="#testimonials" tabindex="0">Testimonials</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="hero" role="banner">
+    <h1>Tiny Techies Initiative</h1>
+    <p>Empowering kindergarten kids with the skills and mindset to thrive in a technology-driven world.</p>
+    <button class="btn-contact" id="contactBtn" aria-label="Contact Tiny Techies Initiative">Contact Us</button>
+  </header>
+
+  <section id="about" tabindex="-1" aria-labelledby="about-title">
+    <h2 id="about-title">About Us</h2>
+    <p>
+      Tiny Techies is an educational initiative dedicated to empowering kindergarten-level students with the skills and mindset to thrive in a technology-driven world. We introduce young learners to programming fundamentals and guide them in creating simple projects using Internet of Things (IoT) devices, fostering curiosity, creativity, and problem-solving abilities through engaging and age-appropriate activities.
+    </p>
+    <p>
+      Our curriculum is designed specifically for young children, using visual programming languages, interactive games, and hands-on projects that make learning technology concepts fun and accessible.
+    </p>
+  </section>
+
+  <section id="vision" tabindex="-1" aria-labelledby="vision-title">
+    <h2 id="vision-title">Our Vision</h2>
+    <p>
+      Our vision is to inspire the next generation of innovators by making technology education accessible and exciting for children from their earliest years. We believe that every child should have the opportunity to develop digital literacy and computational thinking skills that will serve them throughout their lives.
+    </p>
+  </section>
+
+  <section id="impact" tabindex="-1" aria-labelledby="impact-title">
+    <h2 id="impact-title">Our Impact</h2>
+    <p>
+      Since our inception, Tiny Techies has made a significant impact in early childhood technology education. Here's a snapshot of our achievements:
+    </p>
+    <div class="impact-stats">
+      <div class="stat-card">
+        <span class="stat-number">5+</span>
+        <span class="stat-label">Classes Led</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">200+</span>
+        <span class="stat-label">Students Tutored</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Projects Designed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">20+</span>
+        <span class="stat-label">Sessions Directed</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities" tabindex="-1" aria-labelledby="activities-title">
+    <h2 id="activities-title">Our Activities</h2>
+    <p>
+      We engage tiny techies with fun, hands-on activities that introduce them to programming and IoT projects. You can explore a detailed collection of our past sessions, photos, and project examples in our dedicated Google Drive folder.
+    </p>
+    <!-- Replaced the gallery grid with a single, prominent link -->
+    <div style="text-align: center; margin-top: 3rem;">
+        <a href="https://drive.google.com/drive/folders/1JYqzWpWon8iQzbyLW6wPQOiXyrTDbDDb" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="btn-contact"
+           style="font-size: 1.5rem; padding: 1.2rem 4rem;"
+           aria-label="View our full photo and project gallery on Google Drive">
+           View Our Activities Gallery
+        </a>
+    </div>
+  </section>
+
+  <section id="testimonials" tabindex="-1" aria-labelledby="testimonials-title">
+    <h2 id="testimonials-title">What Parents Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>"My daughter was hesitant about technology at first, but Tiny Techies made it so fun and engaging. Now she's creating her own simple animations!"</p>
+        <div class="author">- Rania Hassan, Principal</div>
+      </div>
+      <div class="testimonial">
+        <p>"The instructors are wonderful with young children. They know exactly how to explain complex concepts in ways kids can understand."</p>
+        <div class="author">- Marwa Mohammed, Teacher</div>
+      </div>
+      <div class="testimonial">
+        <p>"I'm amazed at what my 5-year-old has learned. He now understands basic programming logic and loves showing off his projects."</p>
+        <div class="author">- Merna Ashour, Parent</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" tabindex="-1" aria-labelledby="contact-title" style="text-align:center;">
+    <h2 id="contact-title">Get Involved</h2>
+    <p>
+      Interested in joining our journey or learning more? Reach out to us and let's empower tiny techies together!
+    </p>
+    
+    <div class="newsletter">
+      <h3>Stay Updated</h3>
+      <p>Subscribe to our newsletter for updates on programs and events</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Your email address" required aria-label="Email address for newsletter">
+        <button type="submit" class="btn-contact">Subscribe</button>
+      </form>
+    </div>
+    
+    <button class="btn-contact" id="contactBtn2" aria-label="Contact Tiny Techies Initiative" style="margin-top: 2rem;">Contact Us</button>
+  </section>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Tiny Techies Initiative. All rights reserved.</p>
+  </footer>
+  
+  <div class="back-to-top" id="backToTop" aria-label="Back to top">↑</div>
+
+  <script>
+    // Custom modal function (Replacing alert/confirm)
+    function showModal(message) {
+      let modal = document.getElementById('custom-alert-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'custom-alert-modal';
+        modal.style.cssText = `
+          position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+          background: rgba(0, 0, 0, 0.7); display: flex;
+          justify-content: center; align-items: center; z-index: 2000;
+          opacity: 0; transition: opacity 0.3s ease;
+        `;
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = `
+          background: #0072ff; color: #ffd166; padding: 30px;
+          border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          text-align: center; max-width: 90%; transform: scale(0.9);
+          transition: transform 0.3s ease;
+        `;
+        
+        const messageP = document.createElement('p');
+        messageP.textContent = message;
+        messageP.style.cssText = 'font-size: 1.2rem; margin-bottom: 20px;';
+
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Got It!';
+        closeButton.className = 'btn-contact';
+        closeButton.style.cssText = 'padding: 0.75rem 2rem; font-size: 1rem;';
+        
+        closeButton.onclick = () => {
+          modal.style.opacity = 0;
+          modalContent.style.transform = 'scale(0.9)';
+          setTimeout(() => document.body.removeChild(modal), 300);
+        };
+
+        modalContent.appendChild(messageP);
+        modalContent.appendChild(closeButton);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        // Animate in
+        setTimeout(() => {
+          modal.style.opacity = 1;
+          modalContent.style.transform = 'scale(1)';
+        }, 10);
+      }
+    }
+
+    // --- Mobile Menu Toggle Logic ---
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('main-menu');
+
+    menuToggle.addEventListener('click', () => {
+        const isOpen = mainMenu.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        menuToggle.textContent = isOpen ? '✕' : '☰'; 
+    });
+    
+    // Close menu when a link is clicked (for smooth scrolling)
+    mainMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                mainMenu.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.textContent = '☰';
+            }
+        });
+    });
+
+
+    // Animate hero on page load
+    window.addEventListener('load', () => {
+      document.querySelector('header.hero').classList.add('visible');
+    });
+
+    // Scroll animation for sections
+    const sections = document.querySelectorAll('section');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth scroll + focus management for nav links
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if(targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+          // Set focus for accessibility after scrolling
+          setTimeout(() => {
+            targetSection.focus({ preventScroll: true });
+          }, 500);
+        }
+      });
+    });
+
+    // Contact button logic using custom modal
+    function contactAlert() {
+      showModal('Thank you for your interest! Please email us at tinytechiesinitiative@gmail.com');
+    }
+
+    document.getElementById('contactBtn').addEventListener('click', contactAlert);
+    document.getElementById('contactBtn2').addEventListener('click', contactAlert);
+
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Newsletter form
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      showModal(`Thank you for subscribing with ${email}! We'll keep you updated on our programs.`);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
